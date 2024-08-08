@@ -1,16 +1,18 @@
 #!/usr/bin/python3
 
-def minOperations(n):
-    if n <= 1:
+def minOperations(n: int) -> int:
+    """ Minimum Operations """
+    next = 'H'
+    body = 'H'
+    op = 0
+    while (len(body) < n):
+        if n % len(body) == 0:
+            op += 2
+            next = body
+            body += body
+        else:
+            op += 1
+            body += next
+    if len(body) != n:
         return 0
-    
-    operations = 0
-    factor = 2
-    
-    while factor <= n:
-        while n % factor == 0:
-            operations += factor
-            n //= factor
-        factor += 1
-    
-    return operations
+    return op
